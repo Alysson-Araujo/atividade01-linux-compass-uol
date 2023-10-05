@@ -244,16 +244,17 @@ sudo mkdir /etc/scripts
 Dentro desse diretório vamos criar um script chamado **script_verify_status_server.sh. Nele, vamos usar o *systemctl* para verificar o status do servidor Apache.
 
 ```bash
-!/bin/bash
+#!/bin/bash
 
 # Nome do serviço
-SERVICE_NAME="Apache"
+SERVICE_NAME=httpd
 
 # Data e horário da execução da verificação de status
-DATE=$(date)
+DATE=$(date +%d/%m/%Y)
+HOUR=$(date +%H:%M:%S)
 
 # Aqui faz uma verificação para saber se o serviço Apache está online
-if systemctl is-active --quiet httpd; then
+if systemctl is-active --quiet $SERVICE_NAME; then
     SERVICE_STATUS_APACHE="ONLINE"
     OUTPUT_FILE="/var/nfs_share/alysson_araujo/validation_online.log"
 else
@@ -262,11 +263,12 @@ else
 fi
 
 # Escreve essas informações no arquivo
-echo "Arquivo de status do serviço $SERVICE_NAME." >> $OUTPUT_FILE
-echo "Data e Hora da verificação: $DATE" >> $OUTPUT_FILE
+echo "Arquivo de status do serviço $SERVICE_NAME (APACHE)." >> $OUTPUT_FILE
+echo "Data e Hora da verificação: $DATE - $HOUR" >> $OUTPUT_FILE
 echo "O serviço $SERVICE_NAME está $SERVICE_STATUS_APACHE." >> $OUTPUT_FILE
 echo "--------------------------------------------------------" >> $OUTPUT_FILE
 ```
+
 De forma resumida, o script verifica se o serviço do Apache está ativo. Se estiver ativo, ele escreve no arquivo **validation_online.log** que o serviço está online. Se estiver inativo, ele escreve no arquivo **validation_offline.log** que o serviço está offline. Além disso, ele escreve a data e horário da execução da verificação de status.
 
 Exemplo do arquivo **validation_online.log**:
