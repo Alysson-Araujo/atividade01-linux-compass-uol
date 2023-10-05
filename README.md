@@ -296,4 +296,4 @@ A configuração feita pelo comando acima é que a cada 5 minutos o script **scr
 sudo systemctl restart crond
 sudo systemctl enable crond
 ```
-Se tudo ocorrer da forma prevista, o script será executado a cada 5 minutos e os arquivos **validation_online.log** e **validation_offline.log** serão criados na pasta **/var/nfs_share**.
+Se tudo ocorrer da forma prevista, o script será executado a cada 5 minutos e os arquivos **validation_online.log** e **validation_offline.log** serão criados na pasta **/var/nfs_share** de acordo com as condições definidas para cara um.
